@@ -1,0 +1,6 @@
+@Usable_Security_Project_Key_Registry_HostAddress = http://localhost:5028
+
+GET {{Usable_Security_Project_Key_Registry_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
