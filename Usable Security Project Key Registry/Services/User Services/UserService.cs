@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using System.Security.Cryptography;
+using System.Security.Cryptography.Xml;
 using Usable_Security_Project_Key_Registry.Models;
 using Usable_Security_Project_Key_Registry.Models.DTO;
 using Usable_Security_Project_Key_Registry.Repositories;
@@ -43,9 +44,33 @@ namespace Usable_Security_Project_Key_Registry.Services.User_Services
             return _userRepository.GetPublicKey(email);
         }
 
+        public bool CheckEmail(string email)
+        {
+            User? user =  _userRepository.GetByEmail(email);
+
+            if (user != null)
+                return true;
+
+            return false;
+        }
+
+        public bool CheckQR(string email, string QRSignature)
+        {
+            User? user = _userRepository.CheckQR(email, QRSignature);
+
+            if (user != null) return true;
+            return false;
+        }
+        public bool CheckPIN(string email, string PINSignature)
+        {
+            User? user = _userRepository.CheckQR(email, PINSignature);
+
+            if (user != null) return true;
+            return false;
+        }
         public string Add(UserDTO userDTO)
         {
-            User checkForUsers =  _userRepository.GetByEmail(userDTO.Email);
+            User? checkForUsers =  _userRepository.GetByEmail(userDTO.Email);
 
             if (checkForUsers != null)
             {

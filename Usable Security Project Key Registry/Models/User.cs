@@ -14,7 +14,8 @@ namespace Usable_Security_Project_Key_Registry.Models
         public string? PublicKey { get; set; }
         public string? PrivateKey { get; set; }
 
-        public string? phoneNumber { get; set; }
+        public string? QRSignature { get; set; }
+        public string? PINSignature { get; set; }
 
         public DateTime CreateDate { get; set; }
 

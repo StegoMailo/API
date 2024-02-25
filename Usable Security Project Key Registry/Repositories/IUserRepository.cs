@@ -13,6 +13,9 @@ namespace Usable_Security_Project_Key_Registry.Repositories
 
         public User? GetByPublicKey(string publicKey);
 
+        public User? CheckQR(string email, string QRSignature);
+        public User? CheckPIN(string email, string PINSignature);
+
         public string GetPublicKey(string email);
 
         public void Add(User user);

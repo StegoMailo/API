@@ -9,7 +9,8 @@ namespace Usable_Security_Project_Key_Registry.Models.DTO
        
         public string? PublicKey { get; set; }
 
-        public string? phoneNumber { get; set; }
+        public string? QRSignature { get; set; }
+        public string? PINSignature { get; set; }
 
     }
 

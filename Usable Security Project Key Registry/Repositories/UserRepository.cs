@@ -1,4 +1,5 @@
 ﻿using System.Security.Cryptography.X509Certificates;
+using System.Security.Cryptography.Xml;
 using Usable_Security_Project_Key_Registry.Data;
 using Usable_Security_Project_Key_Registry.Models;
 
@@ -36,9 +37,9 @@ namespace Usable_Security_Project_Key_Registry.Repositories
 
         public string GetPublicKey(string email)
         {
-            User user = _db.User.FirstOrDefault(u => u.Email == email);
+            User? user = _db.User.FirstOrDefault(u => u.Email == email);
 
-            if (user != null)
+            if (user != null && user.PublicKey !=null)
             {
                 return user.PublicKey;
             }
@@ -48,6 +49,21 @@ namespace Usable_Security_Project_Key_Registry.Repositories
             }
            
         }
+
+        public User? CheckQR(string email, string QRSignature)
+        {
+            User? user = _db.User.FirstOrDefault(u =>  u.Email == email && u.QRSignature == QRSignature);
+
+            return user;
+        }
+
+        public User? CheckPIN(string email, string PINSignature)
+        {
+            User? user = _db.User.FirstOrDefault(u => u.Email == email && u.PINSignature == PINSignature);
+
+            return user;
+        }
+
         public void Add(User user)
         {
             _db.Add(user);
@@ -64,5 +80,7 @@ namespace Usable_Security_Project_Key_Registry.Repositories
             _db.Add(user);
             Save();
         }
+
+        
     }
 }
